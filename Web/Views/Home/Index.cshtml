@@ -28,7 +28,7 @@
                             var $productList = $('<ul/>');
 
                             $.each(this.OrderProducts, function(j) {
-                                var $li2 = $('<li/>').text(this.Product.Name + ' ('+ this.Quantity +' @@ $' + this.Price + '/ea)')
+                                var $li2 = $('<li/>').text(this.ProductName + ' ('+ this.Quantity +' @@ $' + this.Price + '/ea)')
                                     .appendTo($productList);
                             });
 

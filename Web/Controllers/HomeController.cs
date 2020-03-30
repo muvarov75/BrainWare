@@ -6,15 +6,11 @@ using System.Web.Mvc;
 
 namespace Web.Controllers
 {
-    using Infrastructure;
-
     public class HomeController : Controller
     {
         public ActionResult Index()
         {
             return View();
         }
-
-
     }
 }

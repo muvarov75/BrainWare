@@ -12,7 +12,9 @@ Fork this project to your personal repo and commit all your changes to that bran
 
 ## Changes for Running Locally
 
-Update the connection string in the class <project root>\Web\Infrastructure\Database.cs.
+Update the connection string in the Web.config
+
+Change log path in Web.config
 
 Change the AttachDbFile name to the full path of the BrainWare.mdf file (located under <project root>\Web\App_Data\).
 

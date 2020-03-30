@@ -4,21 +4,39 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using BrainWareBAL;
+using System.Configuration;
+using log4net;
 
 namespace Web.Controllers
 {
     using System.Web.Mvc;
-    using Infrastructure;
-    using Models;
 
     public class OrderController : ApiController
     {
         [HttpGet]
-        public IEnumerable<Order> GetOrders(int id = 1)
+        public IList<BrainWareBAL.Models.Order> GetOrders(int id = -1)
         {
-            var data = new OrderService();
+            IList<BrainWareBAL.Models.Order> orders =new List<BrainWareBAL.Models.Order>();
+            ILog log = LogManager.GetLogger("logger");
 
-            return data.GetOrdersForCompany(id);
+            try
+            {
+                //inidiate dal
+                var db = new BrainWareDAL.ProductOrders(log);
+                db.ConnectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+
+                var bal = new BrainWareBAL.ProductOrderManager(db, log);
+
+                orders= bal.GetOrdersByCompanyId(id);
+            }
+            catch(Exception ex)
+            {
+                log.Error("OrderController.GetOrders()", ex);
+            }
+
+            return orders;
+
         }
     }
 }
